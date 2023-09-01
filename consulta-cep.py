@@ -41,7 +41,7 @@ while True:
         continue
     print('')
 
-    continuar = input('Deseja consultar outro cep? s/n: ')
+    continuar = input(f'{NEGRITO}Deseja consultar outro cep? s/n: {RESET}')
     if continuar.lower() == 's':
         limpar_tela()
         continue
