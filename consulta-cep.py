@@ -2,25 +2,15 @@ import requests
 import os
 import time
 
-MAGENTA = "\033[95m"
 RESET = "\033[0m"
 NEGRITO = "\033[1m"
 
 def limpar_tela():
     os.system('clear')
 
-def mostrar_figlet():
-    print(f'''{MAGENTA}{NEGRITO}__     ___      _             _   _  ___  
-\ \   / (_) ___| |_ ___  _ __| | | |( _ ) 
- \ \ / /| |/ __| __/ _ \| '__| |_| |/ _ \ 
-  \ V / | | (__| || (_) | |  |  _  | (_) |
-   \_/  |_|\___|\__\___/|_|  |_| |_|\___/
-   {RESET}''')
-
-limpar_tela()
 
 while True:
-    mostrar_figlet()
+    limpar_tela()
     cep = input(f'{NEGRITO}Digite um CEP: {RESET}')
     url = f'https://viacep.com.br/ws/{cep}/json'
 
@@ -28,12 +18,11 @@ while True:
 
     if requisicao.status_code == 200:
         limpar_tela()
-        mostrar_figlet()
         print('')
         resultado = requisicao.json()
-        print(f"CIDADE: {resultado.get('localidade')}")
-        print(f"ESTADO: {resultado.get('uf')}")
-        print(f"DDD: {resultado.get('ddd')}")
+        print(f"{NEGRITO}CIDADE:{RESET} {resultado.get('localidade')}")
+        print(f"{NEGRITO}ESTADO:{RESET} {resultado.get('uf')}")
+        print(f"{NEGRITO}DDD:{RESET} {resultado.get('ddd')}")
     else:
         print(f'Error Status Code= {requisicao.status_code}')
         time.sleep(1)
